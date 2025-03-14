@@ -1,5 +1,5 @@
 import { createContext, useState, useContext, ReactNode, useEffect } from "react";
-import { LoginContextType, LoginResponse, LoginCredentials, User } from "../types/login.types";
+import { LoginContextType, LoginResponse, AccountResponse, LoginCredentials, User } from "../types/login.types";
 
 const LoginContext = createContext<LoginContextType | null>(null);
 
@@ -34,6 +34,31 @@ export const LoginProvider: React.FC<LoginProviderProps> = ({ children }) => {
             localStorage.setItem('jwt', data.token);
             localStorage.setItem('user', data.user._id);
             setUser(data.user);
+        } catch (error) {
+            throw error;
+        }
+    }
+
+    // skapa konto
+    const registerAccount = async (credentials: LoginCredentials) => {
+
+        try {
+            const response = await fetch("http://127.0.0.1:3000/account", {
+                method: "POST",
+                body: JSON.stringify(credentials)
+            })
+
+
+            if (!response.ok) {
+                throw new Error;
+            }
+
+            const data = await response.json() as AccountResponse;
+
+            // kollar om inloggningen funkade
+            if (!data.accountCreated) {
+                throw new Error;
+            }
         } catch (error) {
             throw error;
         }
@@ -82,7 +107,7 @@ export const LoginProvider: React.FC<LoginProviderProps> = ({ children }) => {
     }, [])
 
     return (
-        <LoginContext.Provider value={{ user, login, logout, checkJwt }}>
+        <LoginContext.Provider value={{ user, login, logout, registerAccount, checkJwt }}>
             {
                 children
             }

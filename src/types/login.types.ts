@@ -18,10 +18,17 @@ export interface LoginResponse {
     loggedIn: boolean
 }
 
+// respons från backend på account
+export interface AccountResponse {
+    user: User,
+    accountCreated: boolean
+}
+
 // används för att skapa LoginContext
 export interface LoginContextType {
     user: User | null,
     login: (credentials: LoginCredentials) => Promise<void>;
     logout: () => void;
+    registerAccount: (credentials: LoginCredentials) => Promise<void>;
     checkJwt: () => Promise<void>;
 }

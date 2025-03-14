@@ -1,10 +1,10 @@
 import { NavLink } from "react-router-dom"
-import { useLogin } from "../context/LoginContext";
 import './css/Header.css'
 import { useEffect, useState } from "react";
+import { useLogin } from "../context/LoginContext";
 
 const Header = () => {
-  const { user } = useLogin();
+  const { user, logout } = useLogin();
   const [lockedRoute, setLockedRoute] = useState('locked');
   const [menuSpanClass, setMenuSpanClass] = useState('nav-menu-span');
   const [navDivClass, setNavDivClass] = useState('nav-hidden');
@@ -57,6 +57,7 @@ const Header = () => {
             <li><NavLink to="/" className="nav-link">Startsida</NavLink></li>
                 
             <li><NavLink to="/" className="nav-link">Startsida</NavLink></li>
+            <button className="logout-btn" onClick={logout}>Logga ut</button>
                 {/* <li>
                   <form asp-area="Identity" asp-page="/Account/Logout"
                     asp-route-returnUrl="@Url.Action(" Index", "Home", new {area = ""})">
