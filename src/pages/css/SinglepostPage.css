@@ -1,0 +1,35 @@
+.singlepost-article {
+    width: 90%;
+    max-width: 600px;
+    height: auto;
+    min-height: 200px;
+    margin: 10px auto;
+}
+
+.return-blog {
+    position: absolute;
+    top: 0;
+    left: 10px;
+    transform: rotate(180deg);
+    font-size: 40px;
+    cursor: pointer;
+    color: white;
+    transition: 0.25s color;
+}
+
+.return-blog:hover {
+    color: #78c8c8;
+}
+
+.singlepost-heading {
+    margin: 20px 0 20px;
+}
+
+.single-a-d {
+    margin: 20px;
+} 
+
+.singlepost-content{
+    margin: 20px;
+    font-size: 1.1rem;
+}

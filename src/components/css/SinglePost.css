@@ -1,0 +1,31 @@
+.post-heading {
+    text-align: center;
+    font-size: 1.5rem;
+}
+
+.post-author {
+
+}
+
+.post-date {
+
+}
+
+.post-desc {
+    font-size: 1.1rem;
+    line-height: 1.5rem;
+}
+
+.article-div {
+    width: 90%;
+    margin: auto;
+}
+
+.author-date {
+    display: flex;
+    justify-content: space-between;
+    margin: 10px auto 20px;
+    padding-bottom: 4px;
+    font-size: 1.2rem;
+    border-bottom: 2px dotted white;
+}
