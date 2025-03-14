@@ -27,8 +27,32 @@ const LoginPage = () => {
         password: "",
     });
 
-
     const [errors, setErrors] = useState<LoginCredentials>({});
+    const [formTitle, setFormTitle] = useState("Logga in")
+    const [formChangeTitle, setFormChangeTitle] = useState("Redo att skapa din egna blogg?")
+    const [formChangeText, setFormChangeText] = useState("Fyll i dina uppgifter och börja din resa med oss Redo att skapa din egna blogg?")
+    const [formChangeButton, setFormChangeButton] = useState("Skapa konto")
+    const [secondDivClass, setSecondDivClass] = useState("account-second-div")
+    const [firstDivClass, setFirstDivClass] = useState("account-first-div")
+
+    const changeForm = () => {
+        if (formChangeButton == "Skapa konto") {
+            setFormTitle("Skapa konto")
+            setFormChangeButton("Logga in")
+            setFormChangeTitle("Välkommen tillbaka!")
+            setFormChangeText("För att se ditt konto ​​vänligen logga in med din personliga information")
+            setFirstDivClass("account-first-div create")
+            setSecondDivClass("account-second-div create")
+            
+        } else {
+            setFormTitle("Logga in")
+            setFormChangeButton("Skapa konto")
+            setFormChangeTitle("Redo att skapa din egna blogg?")
+            setFormChangeText("Fyll i dina uppgifter och börja din resa med oss Redo att skapa din egna blogg?")
+            setFirstDivClass("account-first-div")
+            setSecondDivClass("account-second-div")
+        }
+    }
 
     // validerar formuläret
     const validateForm = (data: LoginCredentials) => {
@@ -57,13 +81,23 @@ const LoginPage = () => {
     // anropar login från LoginContext
     const loginFormSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
         e.preventDefault();
-        const validationErrors = validateForm(loginForm);
+        let validationErrors;
+        if (formChangeButton == "Skapa konto") {
+            validationErrors = validateForm(loginForm);
+        } else {
+            validationErrors = validateForm(accountForm);
+        }
 
         if (Object.keys(validationErrors).length > 0) {
             setErrors(validationErrors);
         } else {
             setErrors({});
-            accessBackend();
+            if (formChangeButton == "Skapa konto") {
+                accessBackend();
+                
+            } else {
+                accessBackendacc()
+            }
         }
         setError('');
     }
@@ -86,20 +120,6 @@ const LoginPage = () => {
         }
     };
 
-    // anropar registerAccount från LoginContext
-    const accountFormSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
-        e.preventDefault();
-        const validationErrors = validateForm(accountForm);
-
-        if (Object.keys(validationErrors).length > 0) {
-            setErrors(validationErrors);
-        } else {
-            setErrors({});
-            accessBackendacc();
-        }
-        setError('');
-    }
-
     const accessBackendacc = async () => {
         try {
             const credentials: LoginCredentials = {
@@ -120,110 +140,31 @@ const LoginPage = () => {
 
     return (
         <div>
-            <h1>Logga in</h1>
-            <form onSubmit={loginFormSubmit}>
-
-
-                <div>
-                    <label htmlFor="username">Användarnamn</label>
-                    <input type="text" id="username" autoComplete="off" value={loginForm.username} onChange={(event) => { setLoginForm({ ...loginForm, username: event.target.value }); }} />
-                    {errors.username && <span className="form-error">{errors.username}</span>}
-                </div>
-
-                <div>
-                    <label htmlFor="password">Lösenord</label>
-                    <input type="password" id="password" value={loginForm.password} onChange={(event) => { setLoginForm({ ...loginForm, password: event.target.value }); }} />
-                    {errors.password && <span className="form-error">{errors.password}</span>}
-                </div>
-
-                <input type="submit" value="Logga in" />
-                {
-                    error && (
-                        <div className="error-div">
-                            <p>{error}</p>
-                        </div>
-                    )
-                }
-
-            </form>
             <div className="account-page-main-div">
-                <div id="register-page-login-div" className="account-second-div">
-                    <div>
-                        <h2>Välkommen tillbaka!</h2>
-                        <p>För att se ditt konto ​​vänligen logga in med din personliga information</p>
-                        {/* <a asp-page="./login" asp-route-returnUrl="@Model.ReturnUrl"><button className="account-a-btn">logga
-                            in</button></a> */}
-                        <button></button>
-                    </div>
-                </div>
-                <div id="register-page-register-div" className="account-first-div">
-                    <section>
-                        <form id="registerForm" onSubmit={accountFormSubmit}>
-                            <h1>Skapa konto</h1>
-                            {/* <div asp-validation-summary="ModelOnly" className="error-alert" role="alert"></div> */}
-                            <div>
-                                {/* <input asp-for="Input.Email" className="account-inputs" autocomplete="username" aria-required="true"
-                                    placeholder="Email" />
-                                <label asp-for="Input.Email" className="visually-hidden">Email</label>
-                                <span asp-validation-for="Input.Email"></span> */}
-                            </div>
-                            <div>
-                                {/* <input asp-for="Input.Password" className="account-inputs" autocomplete="new-password"
-                                    aria-required="true" placeholder="Password" />
-                                <label asp-for="Input.Password" className="visually-hidden">Password</label>
-                                <span asp-validation-for="Input.Password"></span> */}
-                            </div>
-                            <div>
-                                {/* <input asp-for="Input.ConfirmPassword" className="account-inputs" autocomplete="new-password"
-                                    aria-required="true" placeholder="Confirm password" />
-                                <label asp-for="Input.ConfirmPassword" className="visually-hidden">Confirm Password</label>
-                                <span asp-validation-for="Input.ConfirmPassword"></span> */}
-                            </div>
-                            {/* <button id="registerSubmit" className="account-submit-btn" type="submit">Skapa konto</button> */}
-
-                            <div>
-                                <label htmlFor="username">Användarnamn</label>
-                                <input type="text" id="username" className="account-inputs" autoComplete="off" value={accountForm.username} onChange={(event) => { setAccountForm({ ...accountForm, username: event.target.value }); }} />
-                                {errors.username && <span className="form-error">{errors.username}</span>}
-                            </div>
-
-                            <div>
-                                <label htmlFor="password">Lösenord</label>
-                                <input type="password" id="password" className="account-inputs" value={accountForm.password} onChange={(event) => { setAccountForm({ ...accountForm, password: event.target.value }); }} />
-                                {errors.password && <span className="form-error">{errors.password}</span>}
-                            </div>
-                            <button id="login-submit" className="account-submit-btn" type="submit">Log in</button>
-                        </form>
-                    </section>
-                </div>
-            </div>
-
-
-
-            <div className="account-page-main-div">
-                <div id="login-page-login-div" className="account-first-div">
+                <div id="login-page-login-div" className={firstDivClass}>
                     <section>
                         <form id="account" onSubmit={loginFormSubmit}>
-                            <h1>Logga in</h1>
+                            <h1>{formTitle}</h1>
                             <div>
-                                <label htmlFor="username">Användarnamn</label>
-                                <input type="text" id="username" className="account-inputs" autoComplete="off" value={loginForm.username} onChange={(event) => { setLoginForm({ ...loginForm, username: event.target.value }); }} />
+                                <label htmlFor="username" className="visually-hidden">Användarnamn</label>
+                                <input type="text" id="username" className="account-inputs" placeholder="Användarnamn" autoComplete="off" value={loginForm.username} onChange={(event) => { setLoginForm({ ...loginForm, username: event.target.value }); }} />
                                 {errors.username && <span className="form-error">{errors.username}</span>}
                             </div>
 
                             <div>
-                                <label htmlFor="password">Lösenord</label>
-                                <input type="password" id="password" className="account-inputs" value={loginForm.password} onChange={(event) => { setLoginForm({ ...loginForm, password: event.target.value }); }} />
+                                <label htmlFor="password" className="visually-hidden">Lösenord</label>
+                                <input type="password" id="password" className="account-inputs" placeholder="Lösenord" value={loginForm.password} onChange={(event) => { setLoginForm({ ...loginForm, password: event.target.value }); }} />
                                 {errors.password && <span className="form-error">{errors.password}</span>}
                             </div>
-                            <button id="login-submit" className="account-submit-btn" type="submit">Log in</button>
+                            <button id="login-submit" className="account-submit-btn" type="submit">{formTitle}</button>
                         </form>
                     </section>
                 </div>
-                <div id="login-page-register-div" className="account-second-div">
+                <div id="login-page-register-div" className={secondDivClass}>
                     <div>
-                        <h2>Redo att skapa din egna blogg?</h2>
-                        <p>Fyll i dina uppgifter och börja din resa med oss</p>
+                        <h2>{formChangeTitle}</h2>
+                        <p>{formChangeText}</p>
+                        <button onClick={changeForm} className="account-a-btn">{formChangeButton}</button>
                         {/* <a asp-page="./Register" asp-route-returnUrl="@Model.ReturnUrl"><button className="account-a-btn">Skapa
                             konto</button></a> */}
                     </div>
