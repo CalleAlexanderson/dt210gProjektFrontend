@@ -6,7 +6,7 @@ import { useEffect } from "react";
 import { BookParameter } from "../types/book.types";
 
 const SingleBookPage = () => {
-  const { singleReview, getReview, reviews } = useReviews();
+  const { singleReview, getReview, reviews, getReviews } = useReviews();
   const { getBook, books } = useBook();
   const date: string | undefined = singleReview?.date.toString().substring(0, 10)
   const rating: string | undefined = singleReview?.rating.toString()
@@ -16,7 +16,6 @@ const SingleBookPage = () => {
   const params = useParams();
   let BookId = params.id;
   BookId = BookId?.substring(1, BookId.length)
-  console.log(books[0]);
   
 
 
@@ -32,6 +31,7 @@ const SingleBookPage = () => {
 
       getReview(BookId)
       getBook(para)
+      getReviews(BookId)
       console.log(singleReview);
     }
   }, [])
