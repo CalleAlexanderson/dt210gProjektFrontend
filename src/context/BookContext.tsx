@@ -13,8 +13,9 @@ export const BookProvider: React.FC<BookProviderProps> = ({ children }) => {
 
     // hämta från google api
     const getBooks = async (bookParameter: BookParameter) => {
-
-        let url: string = `https://www.googleapis.com/books/v1/volumes?q=${bookParameter.q}&key=AIzaSyAxmnVjCW6h9_LubNKl2BO9w_zhMacxLUo`
+        // AIzaSyAYUM0ItO089WvCjYZ0M8Lb2EHoJoXBbGY
+        // AIzaSyAxmnVjCW6h9_LubNKl2BO9w_zhMacxLUo
+        let url: string = `https://www.googleapis.com/books/v1/volumes?q=${bookParameter.q}&key=AIzaSyAYUM0ItO089WvCjYZ0M8Lb2EHoJoXBbGY`
         console.log(url);
 
         try {
@@ -68,7 +69,7 @@ export const BookProvider: React.FC<BookProviderProps> = ({ children }) => {
 
     const getBook = async (bookParameter: BookParameter) => {
 
-        let url: string = `https://www.googleapis.com/books/v1/volumes/${bookParameter.q}?key=AIzaSyAxmnVjCW6h9_LubNKl2BO9w_zhMacxLUo`
+        let url: string = `https://www.googleapis.com/books/v1/volumes/${bookParameter.q}?key=AIzaSyAYUM0ItO089WvCjYZ0M8Lb2EHoJoXBbGY`
         console.log(url);
 
         try {
@@ -105,7 +106,6 @@ export const BookProvider: React.FC<BookProviderProps> = ({ children }) => {
                 pageCount: data.volumeInfo.pageCount,
                 averageRating: data.volumeInfo.averageRating,
                 ratingsCount: data.volumeInfo.ratingsCount,
-                image: img
             }
             newBooks.push(newBook)
 

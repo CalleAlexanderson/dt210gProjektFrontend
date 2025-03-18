@@ -55,9 +55,11 @@ const Header = () => {
             <li><NavLink to="/books" className="nav-link">Böcker</NavLink></li>
                 
             <li><NavLink to="/" className="nav-link">Startsida</NavLink></li>
-                
-            <li><NavLink to="/" className="nav-link">Startsida</NavLink></li>
-            <button className="logout-btn" onClick={logout}>Logga ut</button>
+             {
+              !user ? <li><NavLink to="/login" className="nav-link">login</NavLink></li> : <li><button className="logout-btn" onClick={logout}>Logga ut</button></li>
+             }   
+            {/* <li><NavLink to="/login" className="nav-link">login</NavLink></li>
+            <button className="logout-btn" onClick={logout}>Logga ut</button> */}
                 {/* <li>
                   <form asp-area="Identity" asp-page="/Account/Logout"
                     asp-route-returnUrl="@Url.Action(" Index", "Home", new {area = ""})">

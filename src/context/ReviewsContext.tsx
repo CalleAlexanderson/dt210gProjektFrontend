@@ -1,6 +1,7 @@
 import { createContext, useState, useContext, ReactNode } from "react";
 import { ReviewsContextType, Review, UReview, AReview } from "../types/reviews.types";
 import { useLogin } from "./LoginContext";
+import { BookParameter } from "../types/book.types";
 
 
 const ReviewsContext = createContext<ReviewsContextType | null>(null);
@@ -17,10 +18,9 @@ export const ReviewsProvider: React.FC<ReviewsProviderProps> = ({ children }) =>
     const {user} = useLogin();
 
     // hämtar Reviews
-    const getReviews = async () => {
-
+    const getReviews = async (id: string) => {
         try {
-            const response = await fetch("http://127.0.0.1:3000/reviews")
+            const response = await fetch(`http://127.0.0.1:3000/reviews/${id}`)
 
             if (!response.ok) {
                 throw new Error;
@@ -37,16 +37,20 @@ export const ReviewsProvider: React.FC<ReviewsProviderProps> = ({ children }) =>
     // hämtar enskild Review
     const getReview = async (id: string) => {
         try {
-            const response = await fetch(`http://127.0.0.1:3000/Review/${id}`)
+            console.log(id);
+            
+            const response = await fetch(`http://127.0.0.1:3000/review/${id}`)
 
             if (!response.ok) {
                 throw new Error;
             }
-
+            console.log(response);
+            
             const data = await response.json() as Review;
-            console.log(data);
 
             setSingleReview(data);
+            console.log(data);
+            
         } catch (error) {
             throw error;
         }
@@ -55,16 +59,25 @@ export const ReviewsProvider: React.FC<ReviewsProviderProps> = ({ children }) =>
     // lägga till en Review
     const addReview = async (aReview: AReview) => {
         let key: string = "Bearer " + localStorage.getItem('jwt')
+        console.log(key);
+        console.log(aReview);
+        console.log("review title: "+aReview.title);
+        console.log(user?.username);
+        
+        
+        
         try {
-            const response = await fetch(`http://127.0.0.1:3000/add/Review`, {
-                method: "Review",
+            const response = await fetch(`http://127.0.0.1:3000/add/review`, {
+                method: "POST",
                 headers: {
                     'authorization': key
                 },
                 body: JSON.stringify({ 
+                    bookid: aReview.bookId,
                     title: aReview.title,
-                    author: user?.username,
+                    username: user?.username,
                     content: aReview.content,
+                    rating: aReview.rating
                 })
             })
 
@@ -74,6 +87,9 @@ export const ReviewsProvider: React.FC<ReviewsProviderProps> = ({ children }) =>
 
             const data = await response.json() as any;
             console.log(data);
+            if (aReview.bookId) {
+                await getReview(aReview.bookId);
+            }
         } catch (error) {
             throw error;
         }
@@ -102,7 +118,6 @@ export const ReviewsProvider: React.FC<ReviewsProviderProps> = ({ children }) =>
             console.log(data);
 
 
-            getReviews();
         } catch (error) {
             throw error;
         }
@@ -128,7 +143,6 @@ export const ReviewsProvider: React.FC<ReviewsProviderProps> = ({ children }) =>
             if (!data.deleted) {
                 throw new Error
             }
-            getReviews();
         } catch (error) {
             throw error;
         }

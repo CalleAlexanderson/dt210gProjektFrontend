@@ -1,15 +1,15 @@
 // användaren
 export interface Book {
     id: string,
-    title: string,
-    authors: string[],
-    publishedDate: string,
-    description: string,
-    categories: string[],
-    pageCount: number,
-    averageRating: number,
-    ratingsCount: number,
-    image: string | null
+    title?: string,
+    authors?: string[],
+    publishedDate?: string,
+    description?: string,
+    categories?: string[],
+    pageCount?: number,
+    averageRating?: number,
+    ratingsCount?: number,
+    image?: string | null
 }
 
 // det som skickas med i getBooks

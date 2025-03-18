@@ -1,16 +1,20 @@
 // blogginlägg
 export interface Review {
     _id: string,
+    bookId: string,
     title: string,
-    author: string,
+    username: string,
     content: string,
+    rating: number,
     date: Date
 }
 
 // lägg till blogginlägg
 export interface AReview {
+    bookId?: string,
     title?: string,
-    content?: string
+    content?: string,
+    rating?: string
 }
 
 // uppdatera blogginlägg
@@ -24,7 +28,7 @@ export interface UReview {
 export interface ReviewsContextType {
     reviews: Review[],
     singleReview: Review | null,
-    getReviews: () => Promise<void>; // Review[]
+    getReviews: (id: string) => Promise<void>;
     getReview: (id: string) => Promise<void>;
     addReview: (aReview: AReview) => Promise<void>;
     updateReview: (uReview: UReview) => Promise<void>;

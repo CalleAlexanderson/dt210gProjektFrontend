@@ -13,7 +13,7 @@ const LoginPage = () => {
     // kollar om man är inloggad (user finns)
     useEffect(() => {
         if (user) {
-            navigate("/admin");
+            navigate("/");
         }
     }, [user])
 
@@ -56,6 +56,7 @@ const LoginPage = () => {
 
     // validerar formuläret
     const validateForm = (data: LoginCredentials) => {
+        
         const validationErrors: LoginCredentials = {};
 
         if (!data.username) {
@@ -82,21 +83,21 @@ const LoginPage = () => {
     const loginFormSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
         e.preventDefault();
         let validationErrors;
-        if (formChangeButton == "Skapa konto") {
-            validationErrors = validateForm(loginForm);
-        } else {
-            validationErrors = validateForm(accountForm);
-        }
+        console.log(loginForm);
+        
+        validationErrors = validateForm(loginForm);
+        
 
         if (Object.keys(validationErrors).length > 0) {
             setErrors(validationErrors);
         } else {
             setErrors({});
-            if (formChangeButton == "Skapa konto") {
-                accessBackend();
+            
+            if (formTitle == "Skapa konto") {
+                accessBackendacc();
                 
             } else {
-                accessBackendacc()
+                accessBackend()
             }
         }
         setError('');
@@ -110,8 +111,10 @@ const LoginPage = () => {
                 password: loginForm.password
             }
             await login(credentials);
-            navigate("/admin")
+            navigate("/")
         } catch (error) {
+            console.log(error);
+            
             setLoginForm({
                 username: "",
                 password: "",
@@ -123,14 +126,21 @@ const LoginPage = () => {
     const accessBackendacc = async () => {
         try {
             const credentials: LoginCredentials = {
-                username: accountForm.username,
-                password: accountForm.password
+                username: loginForm.username,
+                password: loginForm.password
             }
             await registerAccount(credentials);
 
-            // ändra sidan till login mode
+            // ändrar till login
+            setLoginForm({
+                username: "",
+                password: "",
+            });
+            changeForm();
         } catch (error) {
-            setAccountForm({
+            console.log(error);
+            
+            setLoginForm({
                 username: "",
                 password: "",
             });
@@ -145,6 +155,7 @@ const LoginPage = () => {
                     <section>
                         <form id="account" onSubmit={loginFormSubmit}>
                             <h1>{formTitle}</h1>
+                            {error && <p className="form-error">{error}</p>}
                             <div>
                                 <label htmlFor="username" className="visually-hidden">Användarnamn</label>
                                 <input type="text" id="username" className="account-inputs" placeholder="Användarnamn" autoComplete="off" value={loginForm.username} onChange={(event) => { setLoginForm({ ...loginForm, username: event.target.value }); }} />
