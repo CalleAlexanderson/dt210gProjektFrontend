@@ -27,7 +27,10 @@ export const ReviewsProvider: React.FC<ReviewsProviderProps> = ({ children }) =>
             }
 
             const data = await response.json() as Review[];
-
+            console.log("data:");
+            
+            console.log(data);
+            
             setReviews(data);
         } catch (error) {
             throw error;
@@ -39,7 +42,7 @@ export const ReviewsProvider: React.FC<ReviewsProviderProps> = ({ children }) =>
         try {
             console.log(id);
             
-            const response = await fetch(`http://127.0.0.1:3000/review/${id}`)
+            const response = await fetch(`http://127.0.0.1:3000/review/${id}/${user?.username}`)
 
             if (!response.ok) {
                 throw new Error;
