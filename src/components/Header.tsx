@@ -52,7 +52,7 @@ const Header = () => {
             <div className="mobile-nav-only">
               <ul>
                 
-            <li><NavLink to="/" className="nav-link">Startsida</NavLink></li>
+            <li><NavLink to="/books" className="nav-link">Böcker</NavLink></li>
                 
             <li><NavLink to="/" className="nav-link">Startsida</NavLink></li>
                 
