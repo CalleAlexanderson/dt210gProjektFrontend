@@ -5,7 +5,7 @@ import './css/EditReviewPage.css'
 import { AReview } from '../types/reviews.types';
 
 const EditReviewPage = () => {
-    const { singleReview, updateReview } = useReviews();
+    const { singleReview, updateReview, deleteReview } = useReviews();
     const rating: string | undefined = singleReview?.rating.toString()
 
     const [editForm, setEditForm] = useState<AReview>({
@@ -24,9 +24,30 @@ const EditReviewPage = () => {
     id = id?.substring(1, id.length)
     let bookid = params.bookid;
     bookid = bookid?.substring(1, bookid.length)
-    console.log("id: "+ id);
-    console.log("bookid: "+ bookid);
-    
+
+    const [deleteConfirmDivClass, setdeleteConfirmDivClass] = useState('delete-confirm-div hidden');
+    const [error, setError] = useState('');
+
+    const deleteBtnClicked = () => {
+        console.log("funkar");
+        
+        setdeleteConfirmDivClass('delete-confirm-div');
+    }
+
+    const deleteConfirmed = async () => {
+        setError('');
+        setdeleteConfirmDivClass('delete-confirm-div hidden');
+        try {
+            await deleteReview(id);
+            navigate(`/book/${bookid}`);
+        } catch (error) {
+            window.scrollTo({
+                top: 0,
+                behavior: "smooth"
+            });
+            setError("Du har inte befogenhet att ta bort blogginlägg")
+        }
+    }
 
     // validerar formuläret
     const validateForm = (data: AReview) => {
@@ -90,6 +111,16 @@ const EditReviewPage = () => {
 
     return (
         <>
+            <div className={deleteConfirmDivClass}>
+                <p>Vill du verkligen ta bort inlägget "{editForm.title}"?</p>
+                <button className="delete-yes" onClick={() => {
+                    deleteConfirmed();
+                }}>Ja</button>
+                <button className="delete-no" onClick={() => {
+                    setdeleteConfirmDivClass('delete-confirm-div hidden');
+                }}
+                >Nej</button>
+            </div>
             <form className="admin-form" onSubmit={EditReviewFormSubmit}>
                 <p role="link" className="return-blog" onClick={() => {
                     navigate(`/book/${bookid}`);
@@ -117,6 +148,9 @@ const EditReviewPage = () => {
 
                 <input type="submit" value="Spara" />
             </form>
+                <button className="admin-btn del" onClick={() => {
+                  deleteBtnClicked()
+                }}>Ta bort</button>
         </>
     )
 }

@@ -132,15 +132,14 @@ export const ReviewsProvider: React.FC<ReviewsProviderProps> = ({ children }) =>
     }
 
     // ta bort en Review
-    const deleteReview = async (dReview: Review) => {
+    const deleteReview = async (id: string | undefined) => {
         let key: string = "Bearer " + localStorage.getItem('jwt')
         try {
-            const response = await fetch(`http://127.0.0.1:3000/delete/${dReview._id}`, {
+            const response = await fetch(`http://127.0.0.1:3000/delete/review/${id}`, {
                 method: "DELETE",
                 headers: {
                     'authorization': key
-                },
-                body: JSON.stringify({ role: user?.role})
+                }
             })
 
             if (!response.ok) {
