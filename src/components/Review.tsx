@@ -14,7 +14,7 @@ const SinglePost = (props: Review) => {
       <div className="article-div">
         <h3 className="post-heading">{props.title}</h3>
         <div className="author-date">
-          <p className="post-author">{props.author}</p>
+          <p className="post-author">{props.username}</p>
           <p className="post-date">{date}</p>
         </div>
         <p className="post-desc">{postDesc}</p>

@@ -32,6 +32,7 @@ export const ReviewsProvider: React.FC<ReviewsProviderProps> = ({ children }) =>
             console.log(data);
             
             setReviews(data);
+            
         } catch (error) {
             throw error;
         }
@@ -101,7 +102,10 @@ export const ReviewsProvider: React.FC<ReviewsProviderProps> = ({ children }) =>
     // uppdatera en Review
     const updateReview = async (uReview: UReview) => {
         let key: string = "Bearer " + localStorage.getItem('jwt')
+        console.log("id: "+uReview._id);
+        
         try {
+            
             const response = await fetch(`http://127.0.0.1:3000/update/${uReview._id}`, {
                 method: "PUT",
                 headers: {
@@ -110,6 +114,7 @@ export const ReviewsProvider: React.FC<ReviewsProviderProps> = ({ children }) =>
                 body: JSON.stringify({ 
                     title: uReview.title,
                     content: uReview.content,
+                    rating: uReview.rating
                 })
             })
 

@@ -52,40 +52,40 @@ const SingleBookPage = () => {
         }</p>
       </div>
       <div>
-        <p>Rating:  {
+        <p>Google rating:  {
           books[0]?.averageRating ? (books[0]?.averageRating) : (<span>?</span>)
         }
           /5</p>
-        <p>Reviews:   {
+        <p>Google reviews:   {
           books[0]?.ratingsCount ? (books[0]?.ratingsCount) : (<span>?</span>)
         }</p>
       </div>
       <p className="singlepost-content">{books[0]?.description}</p>
       <div>
-        <p>Din review:</p>
+        <h2>Din review:</h2>
         {singleReview ? (
 
           <div>
-            <h2>{singleReview.title}</h2>
+            <h3>{singleReview.title}</h3>
             <p>{date}</p>
             <p>{singleReview.content}</p>
             <span>{rating}</span>
+            <NavLink to={`/editreview/:${singleReview._id}/:${books[0].id}`} className="nav-link">Redigera</NavLink>
           </div>
         ) : (
           <NavLink to={`/addreview/:${BookId}`} className="nav-link">review</NavLink>
 
         )}
       </div>
+        <h2>Reviews: </h2>
+        <p>Antal reviews: {reviews.length}</p>
       <ul>
       {
           // Kollar så books inte är tom
           reviews.length > 0 ?
             reviews.map((review) => (
-              
-              // gjorde article här så key funkar
-              
               <li key={review._id}>
-                <h2>{review.title}</h2>
+                <h3>{review.title}</h3>
                 <p>{review.username}</p>
                 <p>{review.date?.toString()}</p>
                 <p>{review.rating}</p>

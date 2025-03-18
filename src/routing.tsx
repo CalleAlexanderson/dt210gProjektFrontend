@@ -6,6 +6,7 @@ import LoginPage from "./pages/LoginPage";
 import BooksPage from "./pages/BooksPage";
 import SingleBookPage from "./pages/SingleBookPage";
 import AddReviwPage from "./pages/AddReviwPage";
+import EditReviwPage from "./pages/EditReviewPage";
 
 const router = createBrowserRouter([
     {
@@ -37,6 +38,15 @@ const router = createBrowserRouter([
 
                 )
             },
+            {
+                path: "/editreview/:id/:bookid",
+                element: (
+                    <ProtectedRoute>
+                        <EditReviwPage />
+                    </ProtectedRoute>
+
+                )
+            }
         ]
     }
 

@@ -21,7 +21,8 @@ export interface AReview {
 export interface UReview {
     _id?: string,
     title?: string,
-    content?: string
+    content?: string,
+    rating?: string
 }
 
 // används för att skapa ReviewsContext

@@ -2,7 +2,7 @@ import React from 'react'
 import { useState } from "react";
 import { useReviews } from "../context/ReviewsContext";
 import { useNavigate, useParams } from "react-router-dom";
-import './css/EditPostPage.css'
+import './css/EditReviewPage.css'
 import { AReview, Review } from '../types/reviews.types';
 import { useLogin } from '../context/LoginContext';
 
