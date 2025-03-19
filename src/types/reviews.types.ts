@@ -34,5 +34,5 @@ export interface ReviewsContextType {
     getReview: (id: string) => Promise<void>;
     addReview: (aReview: AReview) => Promise<void>;
     updateReview: (uReview: UReview) => Promise<void>;
-    deleteReview: (id: string | undefined) => Promise<void>;
+    deleteReview: (id: string | undefined, bookId: string | undefined) => Promise<void>;
 }

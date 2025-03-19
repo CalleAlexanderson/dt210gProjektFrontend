@@ -40,8 +40,10 @@ const EditReviewPage = () => {
     const deleteConfirmed = async () => {
         // setError('');
         setdeleteConfirmDivClass('delete-confirm-div hidden');
+        console.log("tar bort review");
+        
         try {
-            await deleteReview(id);
+            await deleteReview(id, BookId);
             // navigate(`/book/${bookid}`);
         } catch (error) {
             // window.scrollTo({
@@ -77,6 +79,7 @@ const EditReviewPage = () => {
         return validationErrors;
     }
 
+    // Kollar om JWT är giltig och sedan validerar formuläret
     const EditReviewFormSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
         e.preventDefault();
         if (await checkJwt() == false) {
@@ -92,7 +95,7 @@ const EditReviewPage = () => {
         }
     }
 
-    // Uppdaterar todos i databasen genom api
+    // skapar ny review som skickas till funktion som uppdaterar review i databasen
     const updateDb = async () => {
         console.log("funkar");
 
