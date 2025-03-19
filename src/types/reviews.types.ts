@@ -20,6 +20,7 @@ export interface AReview {
 // uppdatera blogginlägg
 export interface UReview {
     _id?: string,
+    bookId?: string,
     title?: string,
     content?: string,
     rating?: string

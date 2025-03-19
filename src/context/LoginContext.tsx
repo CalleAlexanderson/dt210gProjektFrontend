@@ -1,5 +1,6 @@
 import { createContext, useState, useContext, ReactNode, useEffect } from "react";
 import { LoginContextType, LoginResponse, AccountResponse, LoginCredentials, User } from "../types/login.types";
+import { data } from "react-router-dom";
 
 const LoginContext = createContext<LoginContextType | null>(null);
 
@@ -77,7 +78,7 @@ export const LoginProvider: React.FC<LoginProviderProps> = ({ children }) => {
         const storedUser = localStorage.getItem("user")
 
         if (!jwt) {
-            return;
+            return false;
         }
 
         let key: string = "Bearer " + jwt;
@@ -93,13 +94,17 @@ export const LoginProvider: React.FC<LoginProviderProps> = ({ children }) => {
             if (response.ok) {
                 const data = await response.json() as any;
                 
+                console.log(data);
                 setUser(data);
             }
+            
         } catch (error) {
             localStorage.removeItem('jwt');
             localStorage.removeItem('user');
             setUser(null)
+            return false;
         }
+        return true;
     }
 
     useEffect(() => {

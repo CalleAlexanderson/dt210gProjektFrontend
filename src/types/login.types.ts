@@ -30,5 +30,5 @@ export interface LoginContextType {
     login: (credentials: LoginCredentials) => Promise<void>;
     logout: () => void;
     registerAccount: (credentials: LoginCredentials) => Promise<void>;
-    checkJwt: () => Promise<void>;
+    checkJwt: () => Promise<boolean>;
 }

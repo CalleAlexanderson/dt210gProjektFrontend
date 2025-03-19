@@ -4,6 +4,8 @@ import { NavLink, useNavigate, useParams } from "react-router-dom";
 import './css/SinglepostPage.css'
 import { useEffect } from "react";
 import { BookParameter } from "../types/book.types";
+import AddReview from "../components/AddReview";
+import EditReview from "../components/EditReview";
 
 const SingleBookPage = () => {
   const { singleReview, getReview, reviews, getReviews } = useReviews();
@@ -16,8 +18,6 @@ const SingleBookPage = () => {
   const params = useParams();
   let BookId = params.id;
   BookId = BookId?.substring(1, BookId.length)
-  
-
 
   useEffect(() => {
 
@@ -60,7 +60,7 @@ const SingleBookPage = () => {
           books[0]?.ratingsCount ? (books[0]?.ratingsCount) : (<span>?</span>)
         }</p>
       </div>
-      <p className="singlepost-content" dangerouslySetInnerHTML={{__html: books[0]?.description}}></p>
+      <p className="singlepost-content" dangerouslySetInnerHTML={{ __html: books[0]?.description }}></p>
       <div>
         <h2>Din review:</h2>
         {singleReview ? (
@@ -70,17 +70,21 @@ const SingleBookPage = () => {
             <p>{date}</p>
             <p>{singleReview.content}</p>
             <span>{rating}</span>
-            <NavLink to={`/editreview/:${singleReview._id}/:${books[0].id}`} className="nav-link">Redigera</NavLink>
+            {/* <NavLink to={`/editreview/:${singleReview._id}/:${books[0].id}`} className="nav-link">Redigera</NavLink> */}
+            <EditReview />
           </div>
         ) : (
-          <NavLink to={`/addreview/:${BookId}`} className="nav-link">review</NavLink>
+          <div>
+            {/* <NavLink to={`/addreview/:${BookId}`} className="nav-link">review</NavLink> */}
+            <AddReview />
+          </div>
 
         )}
       </div>
-        <h2>Reviews: </h2>
-        <p>Antal reviews: {reviews.length}</p>
+      <h2>Reviews: </h2>
+      <p>Antal reviews: {reviews.length}</p>
       <ul>
-      {
+        {
           // Kollar så books inte är tom
           reviews.length > 0 ?
             reviews.map((review) => (

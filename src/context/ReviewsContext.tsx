@@ -93,6 +93,7 @@ export const ReviewsProvider: React.FC<ReviewsProviderProps> = ({ children }) =>
             console.log(data);
             if (aReview.bookId) {
                 await getReview(aReview.bookId);
+                await getReviews(aReview.bookId);
             }
         } catch (error) {
             throw error;
@@ -124,6 +125,12 @@ export const ReviewsProvider: React.FC<ReviewsProviderProps> = ({ children }) =>
 
             const data = await response.json() as any;
             console.log(data);
+            console.log(uReview.bookId);
+            
+            if (uReview.bookId) {
+                await getReview(uReview.bookId);
+                await getReviews(uReview.bookId);
+            }
 
 
         } catch (error) {
