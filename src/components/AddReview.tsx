@@ -67,8 +67,6 @@ const AddReview = () => {
         }
 
     }
-
-    const [message, setMessage] = useState('');
     const updateDb = async () => {
         console.log("uppdaterar db");
         try {
@@ -84,7 +82,6 @@ const AddReview = () => {
                 content: '',
                 rating: '1',
             });
-            setMessage('Review skapad')
         } catch (error) {
             setCreateForm({
                 title: '',
@@ -98,11 +95,7 @@ const AddReview = () => {
     return (
         <>
             <form className="admin-form" onSubmit={AddReviewFormSubmit}>
-                <p role="link" className="return-blog" onClick={() => {
-                    navigate(`/book/${BookId}`);
-                }}>➦</p>
                 <h1>Skriv review</h1>
-                <h2>{message}</h2>
                 <div>
                     <label htmlFor="title">Titel</label>
                     <input type="text" id="title" required autoComplete="off" value={createForm.title} onChange={(event) => { setCreateForm({ ...createForm, title: event.target.value }); }} />

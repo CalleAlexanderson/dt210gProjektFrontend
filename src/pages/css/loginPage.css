@@ -36,12 +36,14 @@
 .account-first-div {
     background-color: #D9D9D9;
     transition: 0.5s;
+    height: 300px;
 }
 
 .account-second-div {
     background-color: #A72121;
     color: white;
     transition: 0.5s;
+    height: 300px;
 }
 
 .account-first-div form,
@@ -86,12 +88,20 @@
     text-decoration: none;
     cursor: pointer;
     transition: 0.25s background;
-  }
-  
-  .account-a-btn:hover,
-  .account-a-btn:focus {
+}
+
+.account-a-btn:hover,
+.account-a-btn:focus {
     background-color: #6B0000;
-  }
+}
+
+.account-first-div.create {
+    transform: translateY(300px);
+}
+
+.account-second-div.create {
+    transform: translateY(-300px);
+}
 
 @media (min-width: 768px) {
 
@@ -113,11 +123,11 @@
         height: 400px;
     }
 
-    .account-first-div.create{
-        transform: translateX(300px);
+    .account-first-div.create {
+        transform: translateX(300px) translateY(0);
     }
 
-    .account-second-div.create{
-        transform: translateX(-300px);
+    .account-second-div.create {
+        transform: translateX(-300px) translateY(0);
     }
 }

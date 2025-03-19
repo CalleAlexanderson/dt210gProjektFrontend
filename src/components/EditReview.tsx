@@ -17,7 +17,6 @@ const EditReviewPage = () => {
     });
 
     const [errors, setErrors] = useState<AReview>({});
-    // const [message, setMessage] = useState('');
 
     const navigate = useNavigate();
 
@@ -133,7 +132,6 @@ const EditReviewPage = () => {
                 >Nej</button>
             </div>
             <form className="admin-form" onSubmit={EditReviewFormSubmit}>
-                {/* <h2>{message}</h2> */}
                 <div>
                     <label htmlFor="title">Titel</label>
                     <input type="text" id="title" autoComplete="off" value={editForm.title} onChange={(event) => { setEditForm({ ...editForm, title: event.target.value }); }} />

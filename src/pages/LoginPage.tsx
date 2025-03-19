@@ -22,11 +22,6 @@ const LoginPage = () => {
         password: "",
     });
 
-    const [accountForm, setAccountForm] = useState<LoginCredentials>({
-        username: "",
-        password: "",
-    });
-
     const [errors, setErrors] = useState<LoginCredentials>({});
     const [formTitle, setFormTitle] = useState("Logga in")
     const [formChangeTitle, setFormChangeTitle] = useState("Redo att skapa din egna blogg?")
@@ -111,7 +106,7 @@ const LoginPage = () => {
                 password: loginForm.password
             }
             await login(credentials);
-            navigate("/")
+            navigate(-1);
         } catch (error) {
             console.log(error);
             
@@ -176,8 +171,6 @@ const LoginPage = () => {
                         <h2>{formChangeTitle}</h2>
                         <p>{formChangeText}</p>
                         <button onClick={changeForm} className="account-a-btn">{formChangeButton}</button>
-                        {/* <a asp-page="./Register" asp-route-returnUrl="@Model.ReturnUrl"><button className="account-a-btn">Skapa
-                            konto</button></a> */}
                     </div>
                 </div>
             </div>
