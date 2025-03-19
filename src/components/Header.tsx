@@ -25,7 +25,7 @@ const Header = () => {
       setMenuSpanClass('nav-menu-span');
       setNavDivClass('nav-hidden');
     }
-       
+
   }
 
 
@@ -45,39 +45,23 @@ const Header = () => {
           {/* <a asp-area="" asp-controller="Home" asp-action="Index" className="logo"><img src="~/logo.png"
             asp-append-version="true"></a> */}
           <div id="nav-div" className={navDivClass}>
-            {/* <partial name="_LoginPartial" /> */}
             <ul className="nav-ul">
-            <li><NavLink to="/" className="nav-link">Startsida</NavLink></li>
-            </ul>
-            <div className="mobile-nav-only">
-              <ul>
-                
-            <li><NavLink to="/books" className="nav-link">Böcker</NavLink></li>
-                
-            <li><NavLink to="/" className="nav-link">Startsida</NavLink></li>
-             {
-              !user ? <li><NavLink to="/login" className="nav-link">login</NavLink></li> : <li><button className="logout-btn" onClick={logout}>Logga ut</button></li>
-             }   
-            {/* <li><NavLink to="/login" className="nav-link">login</NavLink></li>
-            <button className="logout-btn" onClick={logout}>Logga ut</button> */}
-                {/* <li>
-                  <form asp-area="Identity" asp-page="/Account/Logout"
-                    asp-route-returnUrl="@Url.Action(" Index", "Home", new {area = ""})">
-                  <button type="submit" className="nav-discover-button">Logout</button>
-                </form>
-              </li> */}
+              <li><NavLink to="/" className="nav-link">Startsida</NavLink></li>
+              <li><NavLink to="/books" className="nav-link">Böcker</NavLink></li>
+              {
+                !user ? <li><NavLink to="/login" className="nav-link">login</NavLink></li> : <li><button className="logout-btn" onClick={logout}>Logga ut</button></li>
+              }
             </ul>
           </div>
         </div>
-      </div>
-      <button type="button" onClick={toggleNav}  id="nav-toggle-btn" aria-label="Toggle navigation">
-        <span  className={menuSpanClass}></span>
-        <span  className={menuSpanClass}></span>
-        <span  className={menuSpanClass}></span>
-      </button>
+        <button type="button" onClick={toggleNav} id="nav-toggle-btn" aria-label="Toggle navigation">
+          <span className={menuSpanClass}></span>
+          <span className={menuSpanClass}></span>
+          <span className={menuSpanClass}></span>
+        </button>
 
-    </nav>
-</header >
+      </nav>
+    </header >
   )
 }
 
