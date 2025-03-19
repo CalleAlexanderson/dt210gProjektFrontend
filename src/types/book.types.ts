@@ -4,7 +4,7 @@ export interface Book {
     title?: string,
     authors?: string[],
     publishedDate?: string,
-    description?: string,
+    description: string,
     categories?: string[],
     pageCount?: number,
     averageRating?: number,

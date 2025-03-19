@@ -60,7 +60,7 @@ const SingleBookPage = () => {
           books[0]?.ratingsCount ? (books[0]?.ratingsCount) : (<span>?</span>)
         }</p>
       </div>
-      <p className="singlepost-content">{books[0]?.description}</p>
+      <p className="singlepost-content" dangerouslySetInnerHTML={{__html: books[0]?.description}}></p>
       <div>
         <h2>Din review:</h2>
         {singleReview ? (
