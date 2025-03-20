@@ -40,7 +40,7 @@
 }
 
 .account-second-div {
-    background-color: #A72121;
+    background-color: blueviolet;
     color: white;
     transition: 0.5s;
     height: 300px;
@@ -62,7 +62,7 @@
     padding: 3px;
     border: none;
     border-radius: 10px;
-    background-color: #A72121;
+    background-color: blueviolet;
     color: white;
     font-size: 20px;
     transition: 0.25s background;
@@ -71,7 +71,7 @@
 
 .account-submit-btn:hover,
 .account-submit-btn:focus {
-    background-color: #6B0000;
+    background-color: #461473;
 }
 
 .account-a-btn {
@@ -81,7 +81,7 @@
     margin: 30px auto;
     border: 3px solid white;
     border-radius: 10px;
-    background-color: #A72121;
+    background-color: blueviolet;
     color: white;
     font-size: 20px;
     text-align: center;
@@ -92,7 +92,7 @@
 
 .account-a-btn:hover,
 .account-a-btn:focus {
-    background-color: #6B0000;
+    background-color: #461473;
 }
 
 .account-first-div.create {

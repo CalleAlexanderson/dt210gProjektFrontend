@@ -82,7 +82,7 @@ header li:last-child a {
   
   #nav-toggle-btn:hover .nav-menu-span,
   #nav-toggle-btn:focus .nav-menu-span{
-    background-color: #A72121;
+    background-color: blueviolet;
   }
   
   #nav-div {
@@ -92,7 +92,7 @@ header li:last-child a {
     width: calc(100% - 80px);
     max-width: 300px;
     height: 100%;
-    border-right: 2px solid #6B0000;
+    border-right: 2px solid #461473;
     background-color: white;
     transition: 0.5s;
     z-index: +1;
@@ -147,7 +147,7 @@ header li:last-child a {
     padding: 5px;
     border: 2px solid black;
     border-radius: 10px;
-    background-color: #A72121;
+    background-color: blueviolet;
     color: white;
     font-size: 28px;
     transition: 0.25s background;
@@ -156,7 +156,7 @@ header li:last-child a {
   
   .nav-discover-button:hover,
   .nav-discover-button:focus {
-    background-color: #6B0000;
+    background-color: #461473;
   }
   
   @media (min-width: 768px) {

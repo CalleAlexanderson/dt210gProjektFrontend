@@ -106,6 +106,7 @@ export const BookProvider: React.FC<BookProviderProps> = ({ children }) => {
                 pageCount: data.volumeInfo.pageCount,
                 averageRating: data.volumeInfo.averageRating,
                 ratingsCount: data.volumeInfo.ratingsCount,
+                image: img
             }
             newBooks.push(newBook)
 

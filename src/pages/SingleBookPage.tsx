@@ -28,30 +28,60 @@ const SingleBookPage = () => {
   }, [])
 
   return (
-    <article className="singlepost-article">
+    <article className="singlebook-article">
       <p role="link" className="return-blog" onClick={() => {
         navigate('/books');
       }}>➦</p>
-      <h1 className="singlepost-heading">{books[0]?.title}</h1>
-      <div className="author-date single-a-d">
-        <p>{books[0]?.authors}</p>
-        <p>Utgivningsdatum:  {
-          books[0]?.publishedDate ? (books[0]?.publishedDate) : (<span>?</span>)
-        }</p>
-        <p>Antal sidor:  {
-          books[0]?.pageCount ? (books[0]?.pageCount) : (<span>?</span>)
-        }</p>
+      <div className="singlebook-content">
+        <div className="singlebook-img-information">
+          {
+            books[0]?.image ? (
+              <img src={books[0].image} alt="bokens framsida" />
+            ) : (
+              <img src="https://placehold.co/300x600?text=Image\n+not+Found" alt="ingen bild hittades" />
+            )
+          }
+
+
+          <section className="singlebook-information">
+            <div className="singlebook-heading singlebook-mobile-h1">
+              <h1 className="">{books[0]?.title}</h1>
+              <p>av <b>{books[0]?.authors}</b></p>
+            </div>
+            
+            <div className="singlebook-date">
+              <p>Utgivningsdatum:</p>
+              <p> {
+                books[0]?.publishedDate ? (books[0]?.publishedDate) : (<span>?</span>)
+              }</p>
+            </div>
+
+            <div className="singlebook-page">
+              <p>Antal sidor:</p>
+              <p> {
+                books[0]?.pageCount ? (books[0]?.pageCount) : (<span>?</span>)
+              }</p>
+            </div>
+
+            <div className="singlebook-google-info">
+              <p>Google rating:  {
+                books[0]?.averageRating ? (books[0]?.averageRating) : (<span>?</span>)
+              }
+                /5</p>
+              <p>Google reviews:   {
+                books[0]?.ratingsCount ? (books[0]?.ratingsCount) : (<span>?</span>)
+              }</p>
+            </div>
+          </section>
+        </div>
+        <div className="singlebook-desc" >
+          <div className="singlebook-heading singlebook-pc-h1">
+            <h1 className="">{books[0]?.title}</h1>
+            <p>av <b>{books[0]?.authors}</b></p>
+          </div>
+          <p dangerouslySetInnerHTML={{ __html: books[0]?.description }}></p>
+        </div>
       </div>
-      <div>
-        <p>Google rating:  {
-          books[0]?.averageRating ? (books[0]?.averageRating) : (<span>?</span>)
-        }
-          /5</p>
-        <p>Google reviews:   {
-          books[0]?.ratingsCount ? (books[0]?.ratingsCount) : (<span>?</span>)
-        }</p>
-      </div>
-      <p className="singlepost-content" dangerouslySetInnerHTML={{ __html: books[0]?.description }}></p>
       <Reviews />
     </article>
   )

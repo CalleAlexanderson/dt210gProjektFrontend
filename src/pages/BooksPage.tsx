@@ -2,7 +2,7 @@ import React, { useEffect, useState } from "react"
 import { useBook } from "../context/BookContext";
 import SingleBook from "../components/SingleBook";
 import { useNavigate } from "react-router-dom";
-import './css/BlogpostsPage.css'
+import './css/BooksPage.css'
 import { BookParameter } from "../types/book.types";
 import searchImg from '../assets/magnifying-glass.png'
 

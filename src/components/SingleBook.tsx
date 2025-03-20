@@ -3,6 +3,7 @@ import './css/SinglePost.css'
 
 const SingleBook = (props: Book) => {
   let desc: string = "Ingen sammanfattning hittades";
+  
   if (props.description) {
     if (props.description.length >= 400) {
       desc = props.description.substring(0, 400);
@@ -14,11 +15,12 @@ const SingleBook = (props: Book) => {
   return (
     <>
       <div className="article-div">
+        
         <div>
           {
             props.image ? (
               <img src={props.image} alt="" />) : (
-              <img src="" alt="" />
+              <img src="https://placehold.co/300x600?text=Image\n+not+Found" alt="" />
             )
           }
           <h3 className="">{props.title}</h3>
