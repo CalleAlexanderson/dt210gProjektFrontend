@@ -8,7 +8,7 @@ import { useLogin } from '../context/LoginContext';
 
 const AddReview = () => {
 
-    const { addReview } = useReviews();
+    const { addReview, getReview } = useReviews();
     const navigate = useNavigate();
     const { checkJwt } = useLogin();
 
@@ -54,13 +54,21 @@ const AddReview = () => {
         return validationErrors;
     }
 
+    const checkIfReview = async (id: string | undefined) => {
+        if (id) {
+            await getReview(id);
+        }
+    }
+
     // anropar login från LoginContext
     const AddReviewFormSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
         e.preventDefault();
-        console.log("jwt:");
 
-        console.log(await checkJwt());
-
+        // Om sidan laddas om så visas inte din egna review, denna uppdaterar så att den visas
+        // görs även on click på input elementen 
+        checkIfReview(BookId);
+        
+        
         if (await checkJwt() == false) {
             navigate('/login')
         }
@@ -104,13 +112,13 @@ const AddReview = () => {
                 <h1>Skriv review</h1>
                 <div>
                     <label htmlFor="title">Titel</label>
-                    <textarea id="title" className="title-textarea" value={createForm.title} onChange={(event) => { setCreateForm({ ...createForm, title: event.target.value }); }}></textarea>
+                    <textarea id="title" className="title-textarea" value={createForm.title} onClick={()=> {checkIfReview(BookId)}} onChange={(event) => { setCreateForm({ ...createForm, title: event.target.value }); }}></textarea>
                     {errors.title && <span className="form-error">{errors.title}</span>}
                 </div>
 
                 <div>
                     <label htmlFor="content">Innehåll</label>
-                    <textarea id="content" className="content-textarea" value={createForm.content} onChange={(event) => { setCreateForm({ ...createForm, content: event.target.value }); }}></textarea>
+                    <textarea id="content" className="content-textarea" value={createForm.content} onClick={()=> {checkIfReview(BookId)}} onChange={(event) => { setCreateForm({ ...createForm, content: event.target.value }); }}></textarea>
                     {errors.content && <span className="form-error">{errors.content}</span>}
                 </div>
 

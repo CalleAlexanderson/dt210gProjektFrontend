@@ -4,8 +4,10 @@ import { useNavigate, useParams } from "react-router-dom";
 // import './css/EditReviewPage.css'
 import { AReview } from '../types/reviews.types';
 import { useLogin } from "../context/LoginContext";
+import editImage from '../assets/edit.png'
 
 const EditReview = () => {
+    
     const { singleReview, updateReview, deleteReview } = useReviews();
     const { checkJwt } = useLogin();
     const rating: string | undefined = singleReview?.rating.toString()
@@ -17,6 +19,21 @@ const EditReview = () => {
     });
 
     const [errors, setErrors] = useState<AReview>({});
+    const [reviewEdit, setReviewEdit] = useState(false);
+
+    function hideReviewEdit() {
+        setReviewEdit(false);
+    }
+
+    function revealReviewEdit() {
+        setReviewEdit(true);
+        // gör så värdena blir korrekta, annars blir de från förra singlereview, dum lösning men funkar
+        setEditForm({
+            title: singleReview?.title,
+            content: singleReview?.content,
+            rating: rating,
+        });
+    }
 
     const navigate = useNavigate();
 
@@ -39,7 +56,6 @@ const EditReview = () => {
     const deleteConfirmed = async () => {
         // setError('');
         setdeleteConfirmDivClass('delete-confirm-div hidden');
-        console.log("tar bort review");
 
         try {
             await deleteReview(id, BookId);
@@ -112,9 +128,8 @@ const EditReview = () => {
                 content: editForm.content,
                 rating: editForm.rating
             }
-            console.log(newReview);
-
             await updateReview(newReview);
+            hideReviewEdit();
         } catch (error) {
             setEditForm({
                 title: '',
@@ -137,35 +152,44 @@ const EditReview = () => {
                 }}
                 >Nej</button>
             </div>
-            <form className="admin-form" onSubmit={EditReviewFormSubmit}>
-                <div>
-                    <label htmlFor="title">Titel</label>
-                    <textarea id="title" className="title-textarea" value={editForm.title} onChange={(event) => { setEditForm({ ...editForm, title: event.target.value }); }}></textarea>
-                    {errors.title && <span className="form-error">{errors.title}</span>}
-                </div>
-                <div>
-                    <label htmlFor="content">Innehåll</label>
-                    <textarea id="content" className="content-textarea" value={editForm.content} onChange={(event) => { setEditForm({ ...editForm, content: event.target.value }); }}></textarea>
-                    {errors.content && <span className="form-error">{errors.content}</span>}
-                </div>
+            {
+                reviewEdit ? (
+                    <div>
+                        <form className="admin-form" onSubmit={EditReviewFormSubmit}>
+                            <div>
+                                <label htmlFor="title">Titel</label>
+                                <textarea id="title" className="title-textarea" value={editForm.title} onChange={(event) => { setEditForm({ ...editForm, title: event.target.value }); }}></textarea>
+                                {errors.title && <span className="form-error">{errors.title}</span>}
+                            </div>
+                            <div>
+                                <label htmlFor="content">Innehåll</label>
+                                <textarea id="content" className="content-textarea" value={editForm.content} onChange={(event) => { setEditForm({ ...editForm, content: event.target.value }); }}></textarea>
+                                {errors.content && <span className="form-error">{errors.content}</span>}
+                            </div>
 
-                <div>
-                    <label htmlFor="rating">Rating</label>
+                            <div>
+                                <label htmlFor="rating">Rating</label>
 
-                    <select name="rating" id="rating" value={editForm.rating} onChange={(event) => { setEditForm({ ...editForm, rating: event.target.value }); }}>
-                        <option value="1">1</option>
-                        <option value="2">2</option>
-                        <option value="3">3</option>
-                        <option value="4">4</option>
-                        <option value="5">5</option>
-                    </select>
-                </div>
+                                <select name="rating" id="rating" value={editForm.rating} onChange={(event) => { setEditForm({ ...editForm, rating: event.target.value }); }}>
+                                    <option value="1">1</option>
+                                    <option value="2">2</option>
+                                    <option value="3">3</option>
+                                    <option value="4">4</option>
+                                    <option value="5">5</option>
+                                </select>
+                            </div>
 
-                <input type="submit" className="form-button" value="Spara" />
-            </form>
-            <button className="form-button del" onClick={() => {
-                deleteBtnClicked()
-            }}>Ta bort</button>
+                            <input type="submit" className="form-button" value="Spara" />
+                        </form>
+                        <button className="form-button del" onClick={() => {
+                            deleteBtnClicked()
+                        }}>Ta bort</button>
+                    </div>
+                ) : (
+                    <button className="edit-button" onClick={revealReviewEdit}> <img src={editImage} alt="redigera recension" /> </button>
+                )
+            }
+
         </>
     )
 }
