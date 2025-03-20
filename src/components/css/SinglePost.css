@@ -17,8 +17,21 @@
 }
 
 .article-div {
-    width: 90%;
-    margin: auto;
+}
+
+.article-div div {
+    margin: 20px;
+}
+
+.article-div img {
+    display: block;
+    height: 200px;
+    margin: 0 auto;
+}
+
+.article-div h3 {
+    margin-left: 10px;
+    text-align: center;
 }
 
 .author-date {
@@ -28,4 +41,47 @@
     padding-bottom: 4px;
     font-size: 1.2rem;
     border-bottom: 2px dotted white;
+}
+
+.article-div-desc{
+    display: none;
+}
+
+@media only screen and (min-width: 500px) {
+
+    .article-div img {
+        display: block;
+        height: 200px;
+        margin: 0;
+    }
+    
+    .article-div h3 {
+        text-align: left;
+    }
+
+    .article-div {
+        display: flex;
+        justify-content: space-between;
+    }
+
+    .article-div-desc{
+        display: block;
+        padding: 0 10px;
+    }
+}
+
+@media only screen and (min-width: 768px) {
+
+    .article-div div {
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+    }
+
+    .article-div {
+        display: block;
+    }
+
+    .article-div-desc{
+        display: none;
+    }
 }

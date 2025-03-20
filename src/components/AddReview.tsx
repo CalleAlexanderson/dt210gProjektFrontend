@@ -35,13 +35,19 @@ const AddReview = () => {
             if (data.title.length < 3) {
                 validationErrors.title = "Titeln måste vara minst 3 tecken"
             }
+            if (data.title.length >= 30) {
+                validationErrors.title = "Titeln får max vara 30 tecken"
+            }
         }
 
         if (!data.content) {
             validationErrors.content = "Fyll i innehåll"
         } else {
             if (data.content.length < 20) {
-                validationErrors.content = "Blogginläggets innehåll måste minst vara 20 tecken långt"
+                validationErrors.content = "Recensionens innehåll måste minst vara 20 tecken långt"
+            }
+            if (data.content.length >= 200) {
+                validationErrors.title = "Recensionens innehåll får max vara 200 tecken"
             }
         }
 
@@ -52,12 +58,12 @@ const AddReview = () => {
     const AddReviewFormSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
         e.preventDefault();
         console.log("jwt:");
-        
+
         console.log(await checkJwt());
-        
+
         if (await checkJwt() == false) {
             navigate('/login')
-        } 
+        }
         const validationErrors = validateForm(createForm);
         if (Object.keys(validationErrors).length > 0) {
             setErrors(validationErrors);
@@ -98,24 +104,26 @@ const AddReview = () => {
                 <h1>Skriv review</h1>
                 <div>
                     <label htmlFor="title">Titel</label>
-                    <input type="text" id="title" required autoComplete="off" value={createForm.title} onChange={(event) => { setCreateForm({ ...createForm, title: event.target.value }); }} />
+                    <textarea id="title" className="title-textarea" value={createForm.title} onChange={(event) => { setCreateForm({ ...createForm, title: event.target.value }); }}></textarea>
                     {errors.title && <span className="form-error">{errors.title}</span>}
                 </div>
 
                 <div>
-                    <label htmlFor="title">Innehåll</label>
-                    <input type="text" id="title" required autoComplete="off" value={createForm.content} onChange={(event) => { setCreateForm({ ...createForm, content: event.target.value }); }} />
+                    <label htmlFor="content">Innehåll</label>
+                    <textarea id="content" className="content-textarea" value={createForm.content} onChange={(event) => { setCreateForm({ ...createForm, content: event.target.value }); }}></textarea>
                     {errors.content && <span className="form-error">{errors.content}</span>}
                 </div>
 
-                <label htmlFor="rating">Rating</label>
-                <select name="rating" id="rating" onChange={(event) => { setCreateForm({ ...createForm, rating: event.target.value }); }}>
-                    <option value="1">1</option>
-                    <option value="2">2</option>
-                    <option value="3">3</option>
-                    <option value="4">4</option>
-                    <option value="5">5</option>
-                </select>
+                <div>
+                    <label htmlFor="rating">Rating</label>
+                    <select name="rating" id="rating" onChange={(event) => { setCreateForm({ ...createForm, rating: event.target.value }); }}>
+                        <option value="1">1</option>
+                        <option value="2">2</option>
+                        <option value="3">3</option>
+                        <option value="4">4</option>
+                        <option value="5">5</option>
+                    </select>
+                </div>
                 <input type="submit" value="Skapa" />
             </form>
         </>

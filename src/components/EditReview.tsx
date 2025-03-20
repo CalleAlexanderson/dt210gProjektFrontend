@@ -5,8 +5,8 @@ import { useNavigate, useParams } from "react-router-dom";
 import { AReview } from '../types/reviews.types';
 import { useLogin } from "../context/LoginContext";
 
-const EditReviewPage = () => {
-    const { singleReview, updateReview, deleteReview, getReview, getReviews } = useReviews();
+const EditReview = () => {
+    const { singleReview, updateReview, deleteReview } = useReviews();
     const { checkJwt } = useLogin();
     const rating: string | undefined = singleReview?.rating.toString()
 
@@ -40,7 +40,7 @@ const EditReviewPage = () => {
         // setError('');
         setdeleteConfirmDivClass('delete-confirm-div hidden');
         console.log("tar bort review");
-        
+
         try {
             await deleteReview(id, BookId);
             // navigate(`/book/${bookid}`);
@@ -64,13 +64,19 @@ const EditReviewPage = () => {
             if (data.title.length < 3) {
                 validationErrors.title = "Titeln måste vara minst 3 tecken"
             }
+            if (data.title.length >= 30) {
+                validationErrors.title = "Titeln får max vara 30 tecken"
+            }
         }
 
         if (!data.content) {
             validationErrors.content = "Fyll i innehåll"
         } else {
             if (data.content.length < 20) {
-                validationErrors.content = "Blogginläggets innehåll måste minst vara 20 tecken långt"
+                validationErrors.content = "Recensionens innehåll måste minst vara 20 tecken långt"
+            }
+            if (data.content.length >= 200) {
+                validationErrors.title = "Recensionens innehåll får max vara 200 tecken"
             }
         }
 
@@ -134,28 +140,30 @@ const EditReviewPage = () => {
             <form className="admin-form" onSubmit={EditReviewFormSubmit}>
                 <div>
                     <label htmlFor="title">Titel</label>
-                    <input type="text" id="title" autoComplete="off" value={editForm.title} onChange={(event) => { setEditForm({ ...editForm, title: event.target.value }); }} />
+                    <textarea id="title" className="title-textarea" value={editForm.title} onChange={(event) => { setEditForm({ ...editForm, title: event.target.value }); }}></textarea>
                     {errors.title && <span className="form-error">{errors.title}</span>}
                 </div>
                 <div>
                     <label htmlFor="content">Innehåll</label>
-                    <textarea id="content" value={editForm.content} onChange={(event) => { setEditForm({ ...editForm, content: event.target.value }); }}></textarea>
+                    <textarea id="content" className="content-textarea" value={editForm.content} onChange={(event) => { setEditForm({ ...editForm, content: event.target.value }); }}></textarea>
                     {errors.content && <span className="form-error">{errors.content}</span>}
                 </div>
 
-                <label htmlFor="rating">Rating</label>
+                <div>
+                    <label htmlFor="rating">Rating</label>
 
-                <select name="rating" id="rating" value={editForm.rating} onChange={(event) => { setEditForm({ ...editForm, rating: event.target.value }); }}>
-                    <option value="1">1</option>
-                    <option value="2">2</option>
-                    <option value="3">3</option>
-                    <option value="4">4</option>
-                    <option value="5">5</option>
-                </select>
+                    <select name="rating" id="rating" value={editForm.rating} onChange={(event) => { setEditForm({ ...editForm, rating: event.target.value }); }}>
+                        <option value="1">1</option>
+                        <option value="2">2</option>
+                        <option value="3">3</option>
+                        <option value="4">4</option>
+                        <option value="5">5</option>
+                    </select>
+                </div>
 
-                <input type="submit" value="Spara" />
+                <input type="submit" className="form-button" value="Spara" />
             </form>
-            <button className="admin-btn del" onClick={() => {
+            <button className="form-button del" onClick={() => {
                 deleteBtnClicked()
             }}>Ta bort</button>
         </>
@@ -163,4 +171,4 @@ const EditReviewPage = () => {
 }
 
 
-export default EditReviewPage
+export default EditReview

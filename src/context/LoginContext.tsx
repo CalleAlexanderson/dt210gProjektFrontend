@@ -90,11 +90,16 @@ export const LoginProvider: React.FC<LoginProviderProps> = ({ children }) => {
                 },
                 body: JSON.stringify({ id: storedUser })
             })
-
+            // FIXA SÅ ATT OM 401 KOMMER TILLBAKA RETURN FALSE
+            console.log(response);
+            
             if (response.ok) {
                 const data = await response.json() as any;
                 
                 console.log(data);
+                if (response.status == 401) {
+                    return false;
+                }
                 setUser(data);
             }
             

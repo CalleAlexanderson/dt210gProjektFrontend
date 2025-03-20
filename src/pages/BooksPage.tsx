@@ -4,6 +4,7 @@ import SingleBook from "../components/SingleBook";
 import { useNavigate } from "react-router-dom";
 import './css/BlogpostsPage.css'
 import { BookParameter } from "../types/book.types";
+import searchImg from '../assets/magnifying-glass.png'
 
 const BlogpostsPage = () => {
   const { getBooks, books } = useBook();
@@ -49,12 +50,12 @@ const BlogpostsPage = () => {
   return (
     <>
       <h1 className="posts-heading">Böcker</h1>
-    {/* sök på böcker */}
-      <form id="account" onSubmit={searchFormSubmit}>
+      {/* sök på böcker */}
+      <form className="search-form" onSubmit={searchFormSubmit}>
+        <label htmlFor="search" className="visually-hidden">Sök:</label>
         <div>
-          <label htmlFor="search" className="">Sök:</label>
-          <input type="text" id="search" className="account-inputs" placeholder="Sök" value={searchTerm} onChange={(event) => { setSearchTerm(event.target.value); }} />
-          <button type="submit">Sök</button>
+          <input type="text" id="search" className="" placeholder="Sök" value={searchTerm} onChange={(event) => { setSearchTerm(event.target.value); }} />
+          <button type="submit"><img src={searchImg} alt="Sök" /></button>
         </div>
       </form>
 
@@ -64,12 +65,11 @@ const BlogpostsPage = () => {
           books.length > 0 ?
             books.map((book) => (
               // gjorde article här så key funkar
-              <article key={book.id}>
+              <article key={book.id} className="books-articles" onClick={() => {
+                navigate(`/book/:${book.id}`);
+              }}>
                 <SingleBook id={book.id} title={book.title} authors={book.authors} publishedDate={book.publishedDate}
-                  description={book.description} categories={book.categories} pageCount={book.pageCount} averageRating={book.averageRating} ratingsCount={book.ratingsCount} />
-                <p role="link" className="readmore" onClick={() => {
-                  navigate(`/book/:${book.id}`);
-                }}>Läs mer ➝</p>
+                  description={book.description} categories={book.categories} pageCount={book.pageCount} averageRating={book.averageRating} ratingsCount={book.ratingsCount} image={book.image} />
               </article>
             )) : <p>Inga böcker hittades</p>
         }

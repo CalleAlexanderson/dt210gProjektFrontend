@@ -3,9 +3,11 @@ import { useReviews } from "../context/ReviewsContext";
 import { useNavigate, useParams } from "react-router-dom";
 import './css/EditReviewPage.css'
 import { AReview } from '../types/reviews.types';
+import { useLogin } from "../context/LoginContext";
 
 const EditReviewPage = () => {
-    const { singleReview, updateReview, deleteReview } = useReviews();
+    const { singleReview, updateReview, deleteReview, getReview, getReviews } = useReviews();
+        const { checkJwt } = useLogin();
     const rating: string | undefined = singleReview?.rating.toString()
 
     const [editForm, setEditForm] = useState<AReview>({
@@ -28,9 +30,8 @@ const EditReviewPage = () => {
     const [deleteConfirmDivClass, setdeleteConfirmDivClass] = useState('delete-confirm-div hidden');
     const [error, setError] = useState('');
 
-    const deleteBtnClicked = () => {
+    const deleteBtnClicked = async () => {
         console.log("funkar");
-        
         setdeleteConfirmDivClass('delete-confirm-div');
     }
 
@@ -38,7 +39,7 @@ const EditReviewPage = () => {
         setError('');
         setdeleteConfirmDivClass('delete-confirm-div hidden');
         try {
-            await deleteReview(id);
+            // await deleteReview(id);
             navigate(`/book/${bookid}`);
         } catch (error) {
             window.scrollTo({
@@ -52,23 +53,23 @@ const EditReviewPage = () => {
     // validerar formuläret
     const validateForm = (data: AReview) => {
         const validationErrors: AReview = {};
+        
 
+        if (!data.title) {
+            validationErrors.title = "Fyll i titel"
+        } else {
+            if (data.title.length < 3) {
+                validationErrors.title = "Titeln måste vara minst 3 tecken"
+            }
+        }
 
-        // if (!data.title) {
-        //     validationErrors.title = "Fyll i titel"
-        // } else {
-        //     if (data.title.length < 3) {
-        //         validationErrors.title = "Titeln måste vara minst 3 tecken"
-        //     }
-        // }
-
-        // if (!data.content) {
-        //     validationErrors.content = "Fyll i innehåll"
-        // } else {
-        //     if (data.content.length < 50) {
-        //         validationErrors.content = "Blogginläggets innehåll måste minst vara 50 tecken långt"
-        //     }
-        // }
+        if (!data.content) {
+            validationErrors.content = "Fyll i innehåll"
+        } else {
+            if (data.content.length < 20) {
+                validationErrors.content = "Blogginläggets innehåll måste minst vara 20 tecken långt"
+            }
+        }
 
 
         return validationErrors;
@@ -76,6 +77,7 @@ const EditReviewPage = () => {
 
     const EditReviewFormSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
         e.preventDefault();
+        checkJwt();
         const validationErrors = validateForm(editForm);
 
         if (Object.keys(validationErrors).length > 0) {
@@ -98,7 +100,13 @@ const EditReviewPage = () => {
                 rating: editForm.rating
             }
             await updateReview(newReview);
-            setMessage('Review ändrad')
+            if (bookid) {
+                getReview(bookid)
+                getReviews(bookid)
+            }
+            setTimeout(() => {
+                setMessage('Review ändrad')
+            }, 1000);
         } catch (error) {
             setEditForm({
                 title: '',
