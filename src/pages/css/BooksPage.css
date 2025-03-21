@@ -92,18 +92,7 @@
     }
 }
 
-@media only screen and (min-width: 1024px) {
-
-    .posts-heading {
-        width: 780px;
-    }
-}
-
 @media only screen and (min-width: 1600px) {
-
-    .posts-heading {
-        width: 1180px;
-    }
 
     .blogposts-display {
         display: grid;

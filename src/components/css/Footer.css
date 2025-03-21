@@ -1,40 +1,25 @@
-/* footer {
-    position: fixed;
-    left: 0;
-    bottom: 0;
-    width: 100%;
-    height: 40px;
-    background-color: cadetblue;
-}
-
-footer a {
-    display: block;
-    margin-top: 10px;
-    color: white;
-    text-align: center;
-    font-size: 1rem;
-    transition: 0.25s;
-}
-
-footer a:hover {
-    color: #78c8c8;
-} */
-  
 footer {
-  /* position: fixed; */
+  position: fixed;
   bottom: 0;
   left: 0;
   width: 100%;
-  height: 50px;
+  height: 100px;
   padding-top: 2px;
   background-color: white;
   border-top: 1px solid black;
 }
 
 footer > *{
+  margin: 0;
   padding: 5px;
 }
 
-/* Please see documentation at https://learn.microsoft.com/aspnet/core/client-side/bundling-and-minification
-for details on configuring this project to bundle and minify static web assets. */
+footer li{
+  padding: 5px 0;
+}
+
+footer p{
+  margin: 10px 0 0;
+  text-align: center;
+}
 

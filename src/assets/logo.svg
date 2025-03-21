@@ -1,0 +1,21 @@
+<svg version="1.2" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 160 80" width="160" height="80">
+	<title>New Project</title>
+	<defs>
+		<image width="50" height="50" id="img1" href="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAADIAAAAyCAYAAAAeP4ixAAAACXBIWXMAAAsTAAALEwEAmpwYAAABJklEQVR4nO2aMUoDURCGvyIQJBEULAKeIDfwCLESvIc2Fp7BO+UABlLYWVgIL0dQG5tfFqfYRpCXzL6dMB9M+R7v2/n3FTsLSTymwB3wDHwCalxVXAIvIzi89hGZ9iRegRvglHaoVuS+J3FGe1QrsrGFXSeILPJhC1vG6SAie90SUURWwM7pViq2/yAixfmKLUOJeMZOf+ydIsqOBIpWOZaXfeUoU4a8flugFCE74oIyWmS0XFBGi4yWC8pokdFyQRktMlouKKNFRssFZbT4fQpz4BHYAl/OX0/0j6pu5fsIDq9DiMgGodfABQGR1RqYEBhZLQnOt4l0093QvJnIFcF5MpFu1n5CYM57c8Ju1n4LLAjKshexsVQ1M+DBfiAI+1NNwsD8ADn+3S5IoeVoAAAAAElFTkSuQmCC"/>
+	</defs>
+	<style>
+		tspan { white-space:pre } 
+		.s0 { fill: #4fc7ff;stroke: #000000;stroke-miterlimit:10 } 
+		.t1 { font-size: 24px;fill: #000000;font-weight: 600;font-family: "BungeeLayers-Outline", "Bungee Layers Outline" } 
+	</style>
+	<path id="Shape 1" fill-rule="evenodd" class="s0" d="m160 0v80h-160v-80z"/>
+	<use id="books-stack-of-three" href="#img1" transform="matrix(1,0,0,1,0,15)"/>
+	<text id="Calles Böcker" style="transform: matrix(1,0,0,1,51,34)" >
+		<tspan x="0" y="0" class="t1">C</tspan><tspan  y="0" class="t1">a</tspan><tspan  y="0" class="t1">l</tspan><tspan  y="0" class="t1">l</tspan><tspan  y="0" class="t1">e</tspan><tspan  y="0" class="t1">s</tspan><tspan  y="0" class="t1">
+</tspan>
+		<tspan x="0" y="28.8" class="t1">B</tspan><tspan  y="28.8" class="t1">ö</tspan><tspan  y="28.8" class="t1">c</tspan><tspan  y="28.8" class="t1">k</tspan><tspan  y="28.8" class="t1">e</tspan><tspan  y="28.8" class="t1">r</tspan><tspan  y="28.8" class="t1">
+</tspan>
+	</text>
+	<g id="Layer 1">
+	</g>
+</svg>

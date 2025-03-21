@@ -7,11 +7,10 @@
 }
 
 .return-blog {
-    position: absolute;
-    top: 0;
-    left: 10px;
     transform: rotate(180deg);
+    margin: 0;
     font-size: 40px;
+    width: max-content;
     cursor: pointer;
     transition: 0.25s color;
 }
