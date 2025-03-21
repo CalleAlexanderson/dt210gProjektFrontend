@@ -95,12 +95,12 @@ export const LoginProvider: React.FC<LoginProviderProps> = ({ children }) => {
             
             if (response.ok) {
                 const data = await response.json() as any;
-                
-                console.log(data);
-                if (response.status == 401) {
-                    return false;
-                }
                 setUser(data);
+            }
+
+            if (response.status == 401) {
+                logout();
+                return false;
             }
             
         } catch (error) {
