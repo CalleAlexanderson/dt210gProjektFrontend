@@ -1,6 +1,5 @@
 import { createContext, useState, useContext, ReactNode, useEffect } from "react";
 import { LoginContextType, LoginResponse, AccountResponse, LoginCredentials, User } from "../types/login.types";
-import { data } from "react-router-dom";
 
 const LoginContext = createContext<LoginContextType | null>(null);
 

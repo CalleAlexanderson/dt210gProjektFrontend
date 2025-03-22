@@ -15,7 +15,6 @@ const Footer = () => {
         </li>
       </ul>
     </footer>
-    // <footer><a href="https://www.flaticon.com/free-icons/lock" title="lock icons">Lock icons created by Those Icons - Flaticon</a></footer>
   )
 }
 

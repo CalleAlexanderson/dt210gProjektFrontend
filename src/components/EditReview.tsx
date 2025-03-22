@@ -1,7 +1,6 @@
 import { useState } from "react";
 import { useReviews } from "../context/ReviewsContext";
 import { useNavigate, useParams } from "react-router-dom";
-// import './css/EditReviewPage.css'
 import { AReview } from '../types/reviews.types';
 import { useLogin } from "../context/LoginContext";
 import editImage from '../assets/edit.png'

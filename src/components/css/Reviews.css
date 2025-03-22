@@ -157,3 +157,49 @@ select {
     padding: 5px;
     font-size: 14px;
 }
+
+
+
+.delete-confirm-div {
+    position: fixed;
+    top: 25%;
+    left: 50%;
+    transform: translate(-50%, 0);
+    width: 200px;
+    border: 1px solid black;
+    border-radius: 10px;
+    background-color: rgb(255, 165, 165);
+    font-size: 1.25rem;
+    text-align: center;
+    z-index: +1;
+}
+
+.delete-confirm-div p {
+    padding: 5px;
+    margin-bottom: 50px;
+}
+
+.delete-confirm-div button {
+    position: absolute;
+    bottom: 10px;
+    padding: 5px;
+    width: 50px;
+    border: 1px solid black;
+    border-radius: 10px;
+    background-color: white;
+    font-size: 1.15rem;
+    cursor: pointer;
+    transition: 0.25s background;
+}
+
+.delete-confirm-div.hidden {
+    visibility: hidden;
+}
+
+.delete-yes {
+    right: 10px;
+}
+
+.delete-no {
+    left: 10px;
+}

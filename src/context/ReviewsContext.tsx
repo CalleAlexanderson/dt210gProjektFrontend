@@ -1,7 +1,6 @@
 import { createContext, useState, useContext, ReactNode } from "react";
 import { ReviewsContextType, Review, UReview, AReview } from "../types/reviews.types";
 import { useLogin } from "./LoginContext";
-import { BookParameter } from "../types/book.types";
 
 
 const ReviewsContext = createContext<ReviewsContextType | null>(null);
