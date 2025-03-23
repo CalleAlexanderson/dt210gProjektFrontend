@@ -58,13 +58,7 @@ const EditReview = () => {
 
         try {
             await deleteReview(id, BookId);
-            // navigate(`/book/${bookid}`);
         } catch (error) {
-            // window.scrollTo({
-            //     top: 0,
-            //     behavior: "smooth"
-            // });
-            // setError("Du har inte befogenhet att ta bort blogginlägg")
         }
     }
 
