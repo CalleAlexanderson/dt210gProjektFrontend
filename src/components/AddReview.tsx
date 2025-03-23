@@ -131,7 +131,7 @@ const AddReview = () => {
                         <option value="5">5</option>
                     </select>
                 </div>
-                <input type="submit" value="Skapa" />
+                <input className='form-button' type="submit" value="Skapa" />
             </form>
         </>
     )
