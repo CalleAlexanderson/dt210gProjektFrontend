@@ -71,15 +71,18 @@ export const LoginProvider: React.FC<LoginProviderProps> = ({ children }) => {
         setUser(null);
     }
 
-    // 
+    // kollar om JWT fortfarande är giltig
     const checkJwt = async () => {
+        // hämtar jwt och user från storage
         const jwt = localStorage.getItem("jwt")
         const storedUser = localStorage.getItem("user")
 
+        // kollar om JWT finns (om någon tidigare loggat in på sidan)
         if (!jwt) {
             return false;
         }
 
+        // kollar med backend om jwt är giltig om inte så loggas användaren ut
         let key: string = "Bearer " + jwt;
         try {
             const response = await fetch("http://127.0.0.1:3000/verify", {
@@ -89,8 +92,6 @@ export const LoginProvider: React.FC<LoginProviderProps> = ({ children }) => {
                 },
                 body: JSON.stringify({ id: storedUser })
             })
-            // FIXA SÅ ATT OM 401 KOMMER TILLBAKA RETURN FALSE
-            console.log(response);
             
             if (response.ok) {
                 const data = await response.json() as any;
@@ -103,9 +104,7 @@ export const LoginProvider: React.FC<LoginProviderProps> = ({ children }) => {
             }
             
         } catch (error) {
-            localStorage.removeItem('jwt');
-            localStorage.removeItem('user');
-            setUser(null)
+            logout();
             return false;
         }
         return true;

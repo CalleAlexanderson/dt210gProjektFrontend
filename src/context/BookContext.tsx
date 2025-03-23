@@ -13,8 +13,8 @@ export const BookProvider: React.FC<BookProviderProps> = ({ children }) => {
 
     // hämta från google api
     const getBooks = async (bookParameter: BookParameter) => {
-        // AIzaSyAYUM0ItO089WvCjYZ0M8Lb2EHoJoXBbGY
-        // AIzaSyAxmnVjCW6h9_LubNKl2BO9w_zhMacxLUo
+        //// AIzaSyAYUM0ItO089WvCjYZ0M8Lb2EHoJoXBbGY
+        //// AIzaSyAxmnVjCW6h9_LubNKl2BO9w_zhMacxLUo
         let url: string = `https://www.googleapis.com/books/v1/volumes?q=${bookParameter.q}&key=AIzaSyAYUM0ItO089WvCjYZ0M8Lb2EHoJoXBbGY`
         console.log(url);
 
@@ -28,8 +28,6 @@ export const BookProvider: React.FC<BookProviderProps> = ({ children }) => {
 
             const data = await response.json() as any;
             setBooks([]);
-            console.log(data);
-            // console.log(data.items.length);
             let newBooks: Book[] = []
             for (let index = 0; index < data.items.length; index++) {
                 let img: string | null;
@@ -38,7 +36,7 @@ export const BookProvider: React.FC<BookProviderProps> = ({ children }) => {
                 } else {
                     img = data.items[index].volumeInfo.imageLinks.thumbnail;
                 }
-
+                // hämtar bara de värdena som är relevanta
                 let newBook: Book = {
                     id: data.items[index].id,
                     title: data.items[index].volumeInfo.title,
@@ -52,12 +50,8 @@ export const BookProvider: React.FC<BookProviderProps> = ({ children }) => {
                     image: img
                 }
                 newBooks.push(newBook)
-                // console.log(books.length);
-                // console.log(books[index]);
-                // console.log(index);
 
             }
-            // console.log(books);
 
             setBooks(newBooks);
             return;
@@ -82,11 +76,6 @@ export const BookProvider: React.FC<BookProviderProps> = ({ children }) => {
 
             const data = await response.json() as any;
             setBooks([]);
-            console.log("data:");
-
-            console.log(data);
-
-            // console.log(data.items.length);
             let newBooks: Book[] = []
 
             let img: string | null;

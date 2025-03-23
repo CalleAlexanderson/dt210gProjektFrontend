@@ -52,8 +52,6 @@ const Review = () => {
               <p className="review-date">{singleReview.date?.toString().substring(0, 10)}</p>
 
               <p className="review-content">{singleReview.content}</p>
-              {/* <EditReview _id={singleReview._id} bookId={singleReview.bookId} title={singleReview.title} 
-              username={singleReview.username} content={singleReview.content} rating={singleReview.rating} date={singleReview.date} /> */}
               <EditReview />
             </div>
           ) : (
