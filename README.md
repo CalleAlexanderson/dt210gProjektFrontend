@@ -1,54 +1,21 @@
-# React + TypeScript + Vite
+# Book Review 👏: frontend som visar böcker från Google books api samt visar recensioner från ett backend api 
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+Webbsidan hämtar data från det backend api som jag skapat här: https://github.com/CalleAlexanderson/dt210gProjektBackend
 
-Currently, two official plugins are available:
+För att köra igång programmet kör 'npm run dev'.
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react/README.md) uses [Babel](https://babeljs.io/) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+Webbplatsen består av type-filer, context-filer, page-components och components, navigering på webbplatsen görs med react-router där Navlink används istället för a-element. 
 
-## Expanding the ESLint configuration
+## Undersidor
 
-If you are developing a production application, we recommend updating the configuration to enable type-aware lint rules:
+Webbsidans header och footer är komponenter där dessa element ligger, sidans navigering ligger i header komponenten. 
 
-```js
-export default tseslint.config({
-  extends: [
-    // Remove ...tseslint.configs.recommended and replace with this
-    ...tseslint.configs.recommendedTypeChecked,
-    // Alternatively, use this for stricter rules
-    ...tseslint.configs.strictTypeChecked,
-    // Optionally, add this for stylistic rules
-    ...tseslint.configs.stylisticTypeChecked,
-  ],
-  languageOptions: {
-    // other options...
-    parserOptions: {
-      project: ['./tsconfig.node.json', './tsconfig.app.json'],
-      tsconfigRootDir: import.meta.dirname,
-    },
-  },
-})
-```
+Webbsidan består av fyra undersidor (page-components): 
 
-You can also install [eslint-plugin-react-x](https://github.com/Rel1cx/eslint-react/tree/main/packages/plugins/eslint-plugin-react-x) and [eslint-plugin-react-dom](https://github.com/Rel1cx/eslint-react/tree/main/packages/plugins/eslint-plugin-react-dom) for React-specific lint rules:
+Startsida där det bara står välkommen till sidan.  
 
-```js
-// eslint.config.js
-import reactX from 'eslint-plugin-react-x'
-import reactDom from 'eslint-plugin-react-dom'
+Sida där man loggar in, den skickas användaren till varje gång webbplatsen kollar om användaren är inloggad och inte är det. 
 
-export default tseslint.config({
-  plugins: {
-    // Add the react-x and react-dom plugins
-    'react-x': reactX,
-    'react-dom': reactDom,
-  },
-  rules: {
-    // other rules...
-    // Enable its recommended typescript rules
-    ...reactX.configs['recommended-typescript'].rules,
-    ...reactDom.configs.recommended.rules,
-  },
-})
-```
+Sida där användaren kan söka på böcker som hämtats från Google books api, dessa skrivs ut genom map och en child-component där böckernas detaljer skickas med som props. 
+
+Sida med detaljer om enskild bok, kommer hit genom att trycka på en bok på sidan där böckerna hämtas. Denna sida har en komponent där recensionerna ligger och i denna komponent ligger två komponenter varav ena är det formulär som lägger till en ny recension på boken och den andra är det formulär som används för att redigera samt den funktion som raderar recensionen. 
