@@ -62,12 +62,6 @@ export const ReviewsProvider: React.FC<ReviewsProviderProps> = ({ children }) =>
     // lägga till en Review
     const addReview = async (aReview: AReview) => {
         let key: string = "Bearer " + localStorage.getItem('jwt')
-        console.log(key);
-        console.log(aReview);
-        console.log("review title: "+aReview.title);
-        console.log(user?.username);
-        
-        
         
         try {
             const response = await fetch(`http://127.0.0.1:3000/add/review`, {

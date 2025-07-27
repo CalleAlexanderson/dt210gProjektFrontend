@@ -1,8 +1,7 @@
 // användaren
 export interface User {
     _id: string,
-    username: string,
-    role: string
+    username: string
 }
 
 // det som skickas med i login
